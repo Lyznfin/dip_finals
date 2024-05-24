@@ -7,11 +7,11 @@ This project is based off [Cataract Detection in Retinal Fundus Image Using Gray
 # Guide to start
 1. Clone this repository
 ``` 
-git clone ... 
+git clone https://github.com/Lyznfin/dip_finals
 ```
 2. Change directory
 ``` 
-cd ... 
+cd dip_finals
 ```
 3. Set up a virtual environment
 ``` 

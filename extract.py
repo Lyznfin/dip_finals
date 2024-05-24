@@ -4,7 +4,6 @@ from skimage.feature import graycomatrix, graycoprops
 from skimage import io
 import os
 
-# 2 arah piksel tetangga (horizontal / vertikal)
 def extract_glcm_features(image_path):
     props = ['contrast', 'homogeneity', 'energy', 'correlation'] # 4 fitur yang akan diekstrak
     image = io.imread(image_path)
