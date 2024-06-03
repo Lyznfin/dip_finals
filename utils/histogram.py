@@ -14,10 +14,10 @@ import numpy as np
 
 def histogram_equalizer(image):
     grey_image = to_gray(image)
-    # histographed = exposure.equalize_adapthist(grey_image, clip_limit=0.03)
+    histographed = exposure.equalize_adapthist(grey_image, clip_limit=0.03)
     # histographed = exposure.equalize_hist(grey_image)
-    p2, p98 = np.percentile(grey_image, (2, 98))
-    histographed = exposure.rescale_intensity(grey_image, in_range=(p2, p98))
+    # p2, p98 = np.percentile(grey_image, (2, 98))
+    # histographed = exposure.rescale_intensity(grey_image, in_range=(p2, p98))
     return histographed
 
 # if __name__ == '__main__':

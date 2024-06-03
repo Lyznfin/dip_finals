@@ -1,28 +1,24 @@
-import joblib
-from utils.extract import extract_glcm_features
-from skimage import io
-import pandas as pd
+import argparse
+from main_v import classify_v
+from main_c import classify_c
 
-# load model
-knn = joblib.load('model_vanilla_2/knn_model.pkl')
-label_encoder = joblib.load('model_vanilla_2/label_encoder.pkl')
-scaler = joblib.load('model_vanilla_2/scaler.pkl')
+def main():
+    parser = argparse.ArgumentParser(description="Classify eye as either normal or cataract.")
+    parser.add_argument("input_path", type=str, help="Path to the input image.")
+    parser.add_argument("flavor", type=str, help="vanilla or choco (development)")
+    args = parser.parse_args()
+    match args.flavor:
+        case 'vanilla':
+            classify_v(args.input_path)
+        case 'choco':
+            classify_c(args.input_path)
+        case _:
+            return f"Wrong command"
+    # print(args.input_path)
 
-# extract fitur dari citra yang ingin diklasifikasi
-image_path = 'image_test/image_cataract_2.png'
-image_features = extract_glcm_features(image_path)
-image_features_df = pd.DataFrame([image_features], columns=['contrast', 'homogeneity', 'energy', 'correlation'])
-
-# flatten dataframe, seperti pada file model
-def flatten_features(features_df: pd.DataFrame):
-    flattened = pd.DataFrame()
-    for col in features_df.columns:
-        flattened = pd.concat([flattened, pd.DataFrame(features_df[col].tolist(), columns=[f"{col}_{i}" for i in range(len(features_df[col][0]))])], axis=1)
-    return flattened
-
-new_features_flattened = flatten_features(image_features_df)
-new_features_scaled = scaler.transform(new_features_flattened)
-predicted_class_encoded = knn.predict(new_features_scaled)
-predicted_class = label_encoder.inverse_transform(predicted_class_encoded)
-
-print(f'Prediksi mata: {predicted_class}')
+if __name__ == "__main__":
+    main()
+    # example usage
+    # py main.py C:\Users\manzi\VSCoding\cataract_classification\image_test\image_cataract_1.png choco
+    # py main.py C:\Users\manzi\VSCoding\cataract_classification\image_test\image_cataract_2.png vanilla
+    # py main.py C:\Users\manzi\VSCoding\cataract_classification\image_test\normal_img_3.png choco
