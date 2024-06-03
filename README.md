@@ -13,9 +13,12 @@ git clone https://github.com/Lyznfin/dip_finals
 ``` 
 cd dip_finals
 ```
-3. Set up a virtual environment
+3. Set up a virtual environment and activate it (optional)
 ``` 
 py -m venv .venv 
+```
+```
+.venv\Scripts\activate
 ```
 4. Install requirements
 ``` 
@@ -23,5 +26,6 @@ pip install -r requirements.txt
 ``` 
 5. Starts the program
 ``` 
-py main.py 
+py main.py [local image path] [option]
 ```
+`Option: vanilla for no histogram, choco with histogram preprocessing`
