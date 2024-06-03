@@ -1,8 +1,9 @@
 # Eye Cataract Image Clasification
-Digital Image Processing Final Project
-<br/>
+#### Digital Image Processing Final Project
 This project is based off [Cataract Detection in Retinal Fundus Image Using Gray Level Co-occurrence Matrix and K-Nearest Neighbor](https://www.atlantis-press.com/article/125966502.pdf) scientific article using kaggle [Cataract Image](https://www.kaggle.com/datasets/jr2ngb/cataractdataset) eye fundus dataset
 <br/>
+
+`Note: This model have an accuracy of 80%-ish`
 
 # Guide to start
 1. Clone this repository
