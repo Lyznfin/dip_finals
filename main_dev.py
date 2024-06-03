@@ -1,5 +1,9 @@
 import joblib
 from utils.extract import extract_glcm_features
+from utils.sharpen import sharpen_image
+from utils.histogram import histogram_equalizer
+from utils.togray import to_gray
+from utils.compare_image import compare_image
 from skimage import io
 import pandas as pd
 
@@ -10,7 +14,16 @@ scaler = joblib.load('model_vanilla_2/scaler.pkl')
 
 # extract fitur dari citra yang ingin diklasifikasi
 image_path = 'image_test/image_cataract_2.png'
-image_features = extract_glcm_features(image_path)
+image = io.imread(image_path)
+
+# image2 = histogram_equalizer(image)
+# image2 = sharpen_image(image)
+
+image2 = histogram_equalizer(image)
+image2 = sharpen_image(image2)
+
+# compare_image(image, image2)
+image_features = extract_glcm_features(image2)
 image_features_df = pd.DataFrame([image_features], columns=['contrast', 'homogeneity', 'energy', 'correlation'])
 
 # flatten dataframe, seperti pada file model
